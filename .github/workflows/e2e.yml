@@ -22,7 +22,7 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
       - name: Cache .m2 and JKube
-        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
         with:
           path: |
             ${{ github.workspace }}/jkube
@@ -54,7 +54,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
       - name: Restore cache .m2 and JKube
-        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
         with:
           path: |
             ${{ github.workspace }}/jkube
@@ -115,7 +115,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
       - name: Restore cache .m2 and JKube
-        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
         with:
           path: |
             ${{ github.workspace }}/jkube

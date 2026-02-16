@@ -20,7 +20,7 @@
   "homepage": "https://github.com/jkubeio/ci#readme",
   "dependencies": {
     "@octokit/rest": "20.0.2",
-    "adm-zip": "0.5.10"
+    "adm-zip": "0.5.16"
   },
   "devDependencies": {
     "husky": "9.0.10",

@@ -18,7 +18,7 @@ describe('workflows module test suite', () => {
   test('artifacts', async () => {
     const result = await workflows.artifacts();
     expect(octokit.actions.listWorkflowRunArtifacts)
-      .toHaveBeenCalledWith({'owner': 'jkubeio', 'repo': 'ci', 'run_id': 313373});
+      .toHaveBeenCalledWith({'owner': 'eclipse-jkube', 'repo': 'ci', 'run_id': 313373});
     expect(result).toMatchObject({total_count: 3, artifacts: expect.any(Array)});
   });
   test('artifactDownload', async () => {
@@ -28,6 +28,6 @@ describe('workflows module test suite', () => {
   test('cancelWorkflowRun', async () => {
     await workflows.cancelWorkflowRun(1337);
     expect(octokit.actions.cancelWorkflowRun)
-      .toHaveBeenCalledWith({'owner': 'jkubeio', 'repo': 'ci', 'run_id': 1337});
+      .toHaveBeenCalledWith({'owner': 'eclipse-jkube', 'repo': 'ci', 'run_id': 1337});
   });
 });

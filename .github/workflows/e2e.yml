@@ -15,6 +15,12 @@ env:
 permissions:
   contents: read
 
+concurrency:
+  # repository_dispatch always runs on github.ref = main, so key on the PR
+  # (falling back to the ref) to avoid cross-cancelling runs for different PRs.
+  group: ${{ github.workflow }}-${{ github.event.client_payload.pr || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   bootstrap-CI-test-run:
     name: Bootstrap CI test run (#${{ github.event.client_payload.pr }})
@@ -62,7 +68,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        kubernetes: [v1.32.4,v1.31.8,v1.30.12]
+        kubernetes: [v1.36.2, v1.35.6, v1.34.9, v1.30.14]
         suite: ['quarkus','quarkus-native','springboot','webapp','other','dockerfile']
     steps:
       - name: Checkout
@@ -89,15 +95,18 @@ jobs:
       - name: Setup Minikube-Kubernetes
         uses: manusa/actions-setup-minikube@v2.18.0
         with:
-          minikube version: v1.35.0
+          minikube version: v1.38.1
           kubernetes version: ${{ matrix.kubernetes }}
           github token: ${{ secrets.GITHUB_TOKEN }}
           start args: --force
       - name: Install and Run Integration Tests
         run: |
-          JKUBE_VERSION=$(mvn -f jkube/pom.xml -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec) \
-          && cd jkube-it \
-          && ./mvnw -B -PKubernetes,${{ matrix.suite }} verify -Djkube.version="$JKUBE_VERSION"
+          JKUBE_VERSION=$(mvn -f jkube/pom.xml -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+          cd jkube-it
+          s=$(date +%s)
+          ./mvnw -B -PKubernetes,${{ matrix.suite }} verify -Djkube.version="$JKUBE_VERSION" && rc=0 || rc=$?
+          echo "| ${{ matrix.kubernetes }} | ${{ matrix.suite }} | $(( $(date +%s) - s ))s | $([ $rc = 0 ] && echo ':heavy_check_mark:' || echo ':x:') |" >> "$GITHUB_STEP_SUMMARY"
+          exit $rc
       - name: Consolidate reports
         if: always()
         run: |

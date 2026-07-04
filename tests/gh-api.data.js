@@ -9,13 +9,13 @@ const getWorkflowRunCompletedSuccess = () => ({
     event: 'repository_dispatch',
     status: 'completed',
     conclusion: 'success',
-    url: 'https://api.github.com/repos/jkubeio/ci/actions/runs/313373',
-    html_url: 'https://github.com/jkubeio/ci/actions/runs/313373',
+    url: 'https://api.github.com/repos/eclipse-jkube/ci/actions/runs/313373',
+    html_url: 'https://github.com/eclipse-jkube/ci/actions/runs/313373',
     created_at: '2015-10-21T03:29:00.000Z',
     updated_at: '2015-10-21T04:29:00.000Z',
     run_attempt: 1,
-    jobs_url: 'https://api.github.com/repos/jkubeio/ci/actions/runs/313373/jobs',
-    logs_url: 'https://api.github.com/repos/jkubeio/ci/actions/runs/313373/logs'
+    jobs_url: 'https://api.github.com/repos/eclipse-jkube/ci/actions/runs/313373/jobs',
+    logs_url: 'https://api.github.com/repos/eclipse-jkube/ci/actions/runs/313373/logs'
   }
 });
 
@@ -26,30 +26,34 @@ const listJobsForWorkflowRun = () => ({
     jobs: [
       {
         id: 13371,
-        html_url: 'https://github.com/jkubeio/ci/runs/13371',
+        html_url: 'https://github.com/eclipse-jkube/ci/runs/13371',
         name: 'Bootstrap CI test run (#1337)',
         status: 'completed',
-        conclusion: 'success'
+        conclusion: 'success',
+        started_at: '2015-10-21T03:29:00.000Z',
+        completed_at: '2015-10-21T03:30:00.000Z'
       },
       {
         id: 13373,
-        html_url: 'https://github.com/jkubeio/ci/runs/13373',
+        html_url: 'https://github.com/eclipse-jkube/ci/runs/13373',
         name: 'Windows (#1337)',
         status: 'completed',
-        conclusion: 'failure'
+        conclusion: 'failure',
+        started_at: '2015-10-21T03:29:00.000Z',
+        completed_at: '2015-10-21T03:34:00.000Z'
       },
       {
         id: 13372,
-        html_url: 'https://github.com/jkubeio/ci/runs/13372',
+        html_url: 'https://github.com/eclipse-jkube/ci/runs/13372',
         name: 'OpenShift v3.11.0 quarkus (#1337)',
         status: 'queued'
       },
       {
         id: 13374,
-        html_url: 'https://github.com/jkubeio/ci/runs/13374',
+        html_url: 'https://github.com/eclipse-jkube/ci/runs/13374',
         name: 'K8S v1.12.0 webapp (#1337)'
       },
-      {id: 13375, html_url: 'https://github.com/jkubeio/ci/runs/13375', name: 'Finish CI test run'}
+      {id: 13375, html_url: 'https://github.com/eclipse-jkube/ci/runs/13375', name: 'Finish CI test run'}
     ]
   }
 });
@@ -63,22 +67,22 @@ const artifactsForWorkflowRun = () => ({
         id: 13371,
         name: 'Test reports (Minikube v1.24.0-other)',
         size_in_bytes: 1269,
-        url: 'https://api.github.com/repos/jkubeio/ci/actions/artifacts/13371',
-        archive_download_url: 'https://api.github.com/repos/jkubeio/ci/actions/artifacts/13371/zip'
+        url: 'https://api.github.com/repos/eclipse-jkube/ci/actions/artifacts/13371',
+        archive_download_url: 'https://api.github.com/repos/eclipse-jkube/ci/actions/artifacts/13371/zip'
       },
       {
         id: 13372,
         name: 'Test reports (Minikube v1.24.0-webapp)',
         size_in_bytes: 1269,
-        url: 'https://api.github.com/repos/jkubeio/ci/actions/artifacts/13371',
-        archive_download_url: 'https://api.github.com/repos/jkubeio/ci/actions/artifacts/13372/zip'
+        url: 'https://api.github.com/repos/eclipse-jkube/ci/actions/artifacts/13371',
+        archive_download_url: 'https://api.github.com/repos/eclipse-jkube/ci/actions/artifacts/13372/zip'
       },
       {
         id: 13373,
         name: 'Test reports (Minikube v1.12.0-other)',
         size_in_bytes: 1269,
-        url: 'https://api.github.com/repos/jkubeio/ci/actions/artifacts/13371',
-        archive_download_url: 'https://api.github.com/repos/jkubeio/ci/actions/artifacts/13373/zip'
+        url: 'https://api.github.com/repos/eclipse-jkube/ci/actions/artifacts/13371',
+        archive_download_url: 'https://api.github.com/repos/eclipse-jkube/ci/actions/artifacts/13373/zip'
       }
     ]
   }

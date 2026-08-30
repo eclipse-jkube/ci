@@ -20,7 +20,7 @@ const checkOutPRBranch = async () => {
 const installJKube = () => {
   try {
     console.log(`Installing JKube project from PR...`);
-    child_process.execSync(`mvn -B -f ${config.jkubeDir}/pom.xml -DskipTests clean install`, {
+    child_process.execFileSync('mvn', ['-B', '-f', `${config.jkubeDir}/pom.xml`, '-DskipTests', 'clean', 'install'], {
       stdio: 'inherit'
     });
   } catch (error) {
@@ -32,7 +32,7 @@ const checkOutITRepo = async () => {
   console.log(`Checking out JKube IT (${config.itRepoGit} repository (${config.itRevision})...`);
   rmDir(config.jkubeITDir);
   try {
-    child_process.execSync(`git clone ${config.itRepoGit} --branch ${config.itRevision} ${config.jkubeITDir}`, {
+    child_process.execFileSync('git', ['clone', config.itRepoGit, '--branch', config.itRevision, config.jkubeITDir], {
       stdio: 'inherit'
     });
   } catch (error) {

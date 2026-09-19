@@ -38,7 +38,9 @@ const config = {
     computeAuth,
     computeCommandLineArguments
   },
-  auth: computeAuth(),
+  get auth() {
+    return computeAuth();
+  },
   ...DEFAULT_CONFIG_VALUES,
   ...computeCommandLineArguments()
 };

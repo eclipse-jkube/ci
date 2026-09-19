@@ -14,7 +14,7 @@ const get = async () => {
 const checkOut = async () => {
   const pr = await get();
   try {
-    child_process.execSync(`git clone ${pr.head.repo.clone_url} --branch "${pr.head.ref}" ${config.jkubeDir}`, {
+    child_process.execFileSync('git', ['clone', pr.head.repo.clone_url, '--branch', pr.head.ref, config.jkubeDir], {
       stdio: 'inherit'
     });
   } catch (error) {

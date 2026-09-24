@@ -70,6 +70,12 @@ jobs:
       matrix:
         kubernetes: [v1.36.2, v1.35.6, v1.34.9, v1.30.14]
         suite: ['quarkus','quarkus-native','springboot','webapp','other','dockerfile']
+        # The jdk17 suite (Spring Boot 4.x) needs JDK 17, so it cannot be part of the
+        # cross-product above. This adds a single extra combination on the newest
+        # Kubernetes, mirroring the jkube-integration-tests repository.
+        include:
+          - kubernetes: v1.36.2
+            suite: jdk17
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -87,10 +93,10 @@ jobs:
           node src/index.js update-status                      \
             --pr=${{ github.event.client_payload.pr }}         \
             --runId=${{ github.run_id }}
-      - name: Setup Java 11
+      - name: Setup Java
         uses: actions/setup-java@v6.0.1
         with:
-          java-version: '11'
+          java-version: ${{ matrix.suite == 'jdk17' && '17' || '11' }}
           distribution: 'temurin'
       - name: Setup Minikube-Kubernetes
         uses: manusa/actions-setup-minikube@v2.18.0

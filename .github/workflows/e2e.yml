@@ -57,7 +57,7 @@ jobs:
         if: ${{ !github.event.client_payload.pr }}
         run: |
           git clone "$JKUBE_REPOSITORY" --branch "$JKUBE_REVISION" jkube
-          mvn -B -f jkube/pom.xml -DskipTests clean install
+          mvn -B -f jkube/pom.xml -DskipTests -DskipITs clean install
           git clone "$IT_REPOSITORY" --branch "$IT_REVISION" jkube-it
 
   minikube:
@@ -236,7 +236,7 @@ jobs:
         run: |
           git clone $env:JKUBE_REPOSITORY --branch $env:JKUBE_REVISION jkube
           cd jkube
-          mvn -B -f pom.xml -DskipTests clean install
+          mvn -B -f pom.xml -DskipTests -DskipITs clean install
           cd ..
           git clone $env:IT_REPOSITORY --branch $env:IT_REVISION jkube-it
       - name: Install and Run Integration Tests

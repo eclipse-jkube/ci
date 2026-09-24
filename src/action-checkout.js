@@ -20,7 +20,9 @@ const checkOutPRBranch = async () => {
 const installJKube = () => {
   try {
     console.log(`Installing JKube project from PR...`);
-    child_process.execSync(`mvn -B -f ${config.jkubeDir}/pom.xml -DskipTests clean install`, {
+    // -DskipITs is required in addition to -DskipTests: maven-failsafe-plugin does not
+    // honour skipTests, so without it JKube's integration tests run during this install.
+    child_process.execSync(`mvn -B -f ${config.jkubeDir}/pom.xml -DskipTests -DskipITs clean install`, {
       stdio: 'inherit'
     });
   } catch (error) {

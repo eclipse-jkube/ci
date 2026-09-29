@@ -99,7 +99,7 @@ jobs:
           java-version: ${{ matrix.suite == 'jdk17' && '17' || '11' }}
           distribution: 'temurin'
       - name: Setup Minikube-Kubernetes
-        uses: manusa/actions-setup-minikube@v2.18.0
+        uses: manusa/actions-setup-minikube@v2.19.0
         with:
           minikube version: v1.38.1
           kubernetes version: ${{ matrix.kubernetes }}
